@@ -13,4 +13,4 @@ export const defaultTheme = {
 
   'blue-500': '#3294F8', // Brand
 
-}
+} as const

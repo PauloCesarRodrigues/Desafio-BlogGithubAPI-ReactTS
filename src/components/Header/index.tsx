@@ -1,7 +1,7 @@
 export function Header(){
   return(
     <header>
-      teste
+      teste da header
     </header>
   )
 }
