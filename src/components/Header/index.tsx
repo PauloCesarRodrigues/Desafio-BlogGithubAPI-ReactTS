@@ -1,7 +1,14 @@
+
+import backgroundImg from '../../images/header/backgroundImg.jpg'
+import { HeaderContainer, HeaderContent } from './styles'
+
 export function Header(){
   return(
-    <header>
-      teste da header
-    </header>
+    <HeaderContainer>
+      <img src={backgroundImg}/>
+    <HeaderContent>
+
+    </HeaderContent>
+    </HeaderContainer>
   )
 }
