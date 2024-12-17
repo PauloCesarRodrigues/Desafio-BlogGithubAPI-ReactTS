@@ -59,28 +59,76 @@ export const ProfileTitles = styled.div`
   align-items: flex-start;
 
   p,h1{
-    color: black;
-    font-size: 1rem;
-    font-weight: normal;
+    color: ${props => props.theme["blue-500"]};
   }
+
+  h1{
+    color: ${props => props.theme["blue-500"]};
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  a{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    cursor: pointer;
+
+    img{
+    height: 1rem;
+    width: 1rem;
+    margin-left: 0.75rem;
+  }
+  }
+
+  p{
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
 `
 
 
 export const ProfileAbout = styled.div`
   text-align: left;
   flex-wrap: wrap;
+
+  max-width: 50rem;
+  word-wrap: break-word; 
+  white-space: normal;
+
+  color: ${props => props.theme["blue-500"]};
+
+  margin-top: -2rem;
 `
 
 export const ProfileLinks = styled.div`
   display: flex;
   flex-direction: row;
+  box-sizing: border-box;
+
+  gap: 1.5rem;
+  margin-left: -1rem;
+
 
   a{
     display: flex;
     flex-direction: row;
-    gap: 1rem;
-    margin-right: 2rem;
+    align-items: flex-start;
+    cursor: pointer;
+
+    p{
+      margin-left: 0.5rem;
+      color: ${props => props.theme["blue-500"]};
+      font-weight: 400;
+    }
+
+    img{
+    height: 1rem;
+    width: 1rem;
+    margin-left: 0.75rem;
   }
+}
 `
 
 export const SearchArea = styled.div`
@@ -155,4 +203,58 @@ export const Repository = styled.div`
   background-color: #fbfbfb;
 
   margin-bottom: 2rem;
+
+  background-color: ${props => props.theme["darkblue-700"]};
+
+  border-radius: 10px;
+`
+
+export const RepositoryHeader = styled.div`
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 3rem 2rem 2.5rem 2rem;
+
+  h2{
+    font-size: 1.5rem;
+    color: ${props => props.theme["darkblue-100"]};
+
+    text-align: left;
+    flex-wrap: wrap;
+
+    max-width: 18rem;
+    word-wrap: break-word; 
+    white-space: normal;
+
+    font-weight: 500;
+  }
+
+  p{
+    font-size: 1rem;
+    color: ${props => props.theme["darkblue-400"]};
+  }
+
+`
+
+export const RepositoryContent = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 2rem;
+
+  p{
+    color: ${props => props.theme["darkblue-300"]};
+    font-size: 1.2rem;
+    font-weight: 300;
+
+    text-align: left;
+    flex-wrap: wrap;
+
+    max-width: 30rem;
+    word-wrap: break-word; 
+    white-space: normal;
+
+    text-overflow: ellipsis
+  }
+
 `
