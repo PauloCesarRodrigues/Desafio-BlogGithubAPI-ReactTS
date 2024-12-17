@@ -21,6 +21,33 @@ import followersIcon from '../../images/home/profileIcons/followersIcon.svg'
 
 export function Home(){
 
+  const secretKey = import.meta.env.VITE_SECRET_KEY;
+
+  const myGithubUser = 'paulocesarrodrigues'
+  const challengeRepository = 'Desafio-BlogGithubAPI-ReactTS'
+
+  //perfil github
+  fetch(`https://api.github.com/users/${myGithubUser}`,{
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${secretKey}`
+    }
+  }) 
+  .then((response) => response.json()) 
+  .then((data) => console.log(data))
+
+
+  //corpo do repositório
+  fetch(`https://api.github.com/repos/${myGithubUser}/${challengeRepository}/issues/1`,{
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${secretKey}`
+    }
+  })
+  .then((response) => response.json()) 
+  .then((data) => console.log(data))
+
+
 
   return(
     <HomeContainer>
