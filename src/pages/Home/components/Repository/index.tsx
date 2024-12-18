@@ -1,16 +1,27 @@
 import { RepositoryContainer, RepositoryContent, RepositoryHeader } from "./styles";
+import { formatDistanceToNow } from 'date-fns';
+import { ptBR } from 'date-fns/locale';
 
-export function Repository( ){
+interface RepositoryProps {
+  body: string;
+  title: string;
+  created_at: string;
+}
+
+
+export const Repository: React.FC<RepositoryProps> = ({ body, title, created_at }) => {
+
+  const tempoPassado = formatDistanceToNow(new Date(created_at), { addSuffix: true, locale: ptBR });
 
   return(
     <RepositoryContainer>
     <RepositoryHeader>
-      <h2> JavaScript data types and data structures</h2>
-      <p>Há 1 dia</p>
+      <h2> {title} </h2>
+      <p>{tempoPassado}</p>
     </RepositoryHeader>
     <RepositoryContent>
       <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur, nulla veniam commodi odio doloribus saepe incidunt a placeat aliquam delectus sequi quos voluptatibus perspiciatis nam illum cupiditate. Iste, doloremque nulla.
+        {body}
       </p>
     </RepositoryContent>
   </RepositoryContainer>

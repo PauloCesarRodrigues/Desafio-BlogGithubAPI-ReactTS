@@ -57,9 +57,11 @@ export const ProfileTitles = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
+  
 
   p,h1{
     color: ${props => props.theme["blue-500"]};
+
   }
 
   h1{
@@ -73,6 +75,7 @@ export const ProfileTitles = styled.div`
     flex-direction: row;
     align-items: flex-start;
     cursor: pointer;
+    text-decoration: none;
 
     img{
     height: 1rem;
@@ -100,6 +103,7 @@ export const ProfileAbout = styled.div`
   color: ${props => props.theme["blue-500"]};
 
   margin-top: -2rem;
+  
 `
 
 export const ProfileLinks = styled.div`
@@ -111,24 +115,32 @@ export const ProfileLinks = styled.div`
   margin-left: -1rem;
 
 
+  p{
+    margin-left: 0.5rem;
+    color: ${props => props.theme["blue-500"]};
+    font-weight: 400;
+    }
+
+  img{
+    height: 1rem;
+    width: 1rem;
+    margin-left: 0.75rem;
+  }
+
+
+  div{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
   a{
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     cursor: pointer;
-
-    p{
-      margin-left: 0.5rem;
-      color: ${props => props.theme["blue-500"]};
-      font-weight: 400;
-    }
-
-    img{
-    height: 1rem;
-    width: 1rem;
-    margin-left: 0.75rem;
+    text-decoration: none;
   }
-}
 `
 
 export const SearchArea = styled.div`

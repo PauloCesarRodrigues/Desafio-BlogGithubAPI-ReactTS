@@ -1,4 +1,5 @@
-import { 
+/* eslint-disable react-refresh/only-export-components */
+import {
   HomeContainer,
   HomeContent,
   ProfileAbout,
@@ -9,72 +10,76 @@ import {
   RepositoriesArea,
   SearchArea,
   SearchAreaInput,
-  SearchAreaTitles } from './styles'
+  SearchAreaTitles,
+} from "./styles";
 
-import linkIcon from '../../images/home/profileIcons/linkIcon.svg'
-import githubIcon from '../../images/home/profileIcons/githubIcon.svg'
-import companyIcon from '../../images/home/profileIcons/companyIcon.svg'
-import followersIcon from '../../images/home/profileIcons/followersIcon.svg'
-import { Repository } from './components/Repository'
+import linkIcon from "../../images/home/profileIcons/linkIcon.svg";
+import githubIcon from "../../images/home/profileIcons/githubIcon.svg";
+import companyIcon from "../../images/home/profileIcons/companyIcon.svg";
+import followersIcon from "../../images/home/profileIcons/followersIcon.svg";
+import { Repository } from "./components/Repository";
+import { getGithubProfile } from "../../utils/getGithubProfile";
+import { getRepositoryIssues } from "../../utils/getRepositoryIssues"
 
-const myGithubUser = 'paulocesarrodrigues'
-const challengeRepository = 'Desafio-BlogGithubAPI-ReactTS'
-
-const secretKey = import.meta.env.VITE_SECRET_KEY;
-
-async function loadGithubProfile(){
-  let githubProfile
-  await fetch(`https://api.github.com/users/${myGithubUser}`,{
-   method: "GET",
-   headers: {
-     Authorization: `Bearer ${secretKey}`
-   }
- }) 
- .then((response) => response.json()) 
- .then((data) => githubProfile = data)
- console.log(githubProfile)
+interface GithubProfile {
+  avatar_url: string
+  name: string
+  html_url: string
+  login: string
+  followers: number
 }
 
-export function Home(){
+interface RepositoryIssue{
+  body: string
+  title: string
+  created_at: Date
+  number: number;
+}
+
+export const myGithubUser = "paulocesarrodrigues";
+export const challengeRepository = "Desafio-BlogGithubAPI-ReactTS";
+export const secretKey = import.meta.env.VITE_SECRET_KEY;
 
 
+const repositoryIssues: RepositoryIssue[] | undefined = await getRepositoryIssues();
+const githubProfile: GithubProfile | undefined = await getGithubProfile();
 
-  //perfil github
-  loadGithubProfile()
-
-
+export function Home() {
   //corpo do repositório
-  fetch(`https://api.github.com/repos/${myGithubUser}/${challengeRepository}`,{
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${secretKey}`
-    }
-  })
-  .then((response) => response.json()) 
-  .then((data) => console.log(data))
 
-
-
-  return(
+  return (
     <HomeContainer>
       <HomeContent>
-
         <ProfileArea>
-          <img src="https://github.com/paulocesarrodrigues.png"/>
+          <img src={githubProfile?.avatar_url} />
           <ProfileContent>
             <ProfileTitles>
-              <h1> Paulo Cesar Rodrigues </h1>
-              <a><p>GITHUB</p> <img src={linkIcon}/></a>
+              <h1> {githubProfile?.name} </h1>
+              <a href={githubProfile?.html_url}>
+                <p>GITHUB</p> <img src={linkIcon} />
+              </a>
             </ProfileTitles>
 
             <ProfileAbout>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem possimus facilis in minus nobis et eum iure officiis. Labore sit harum quae suscipit aliquam corrupti fugiat vel consequatur at aspernatur!</p>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem
+                possimus facilis in minus nobis et eum iure officiis. Labore sit
+                harum quae suscipit aliquam corrupti fugiat vel consequatur at
+                aspernatur!
+              </p>
             </ProfileAbout>
 
             <ProfileLinks>
-              <a><img src={githubIcon}/> <p>Paulocesarrodrigues</p></a>
-              <a><img src={companyIcon}/> <p>Software engineering at UNISA</p></a>
-              <a><img src={followersIcon}/> <p>3 seguidores</p></a>
+              <a href={githubProfile?.html_url}>
+                <img src={githubIcon} /> <p>{githubProfile?.login}</p>
+              </a>
+              <div>
+                <img src={companyIcon} /> <p>Software engineering at UNISA</p>
+              </div>
+              <div>
+                <img src={followersIcon} />{" "}
+                <p>{githubProfile?.followers} seguidores</p>
+              </div>
             </ProfileLinks>
           </ProfileContent>
         </ProfileArea>
@@ -90,19 +95,17 @@ export function Home(){
         </SearchArea>
 
         <RepositoriesArea>
-
-
-        <Repository/>
-        <Repository/>
-        <Repository/>
-        <Repository/>
-        <Repository/>
-        <Repository/>
-        <Repository/>
-
+          {repositoryIssues?.map((issue) =>(
+            <Repository
+            key={issue.number}
+            body={issue.body}  
+            title={issue.title}  
+            created_at={issue.created_at.toString()}  
+          />
+          ))}
 
         </RepositoriesArea>
       </HomeContent>
     </HomeContainer>
-  )
+  );
 }
