@@ -61,12 +61,7 @@ export function Home() {
             </ProfileTitles>
 
             <ProfileAbout>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem
-                possimus facilis in minus nobis et eum iure officiis. Labore sit
-                harum quae suscipit aliquam corrupti fugiat vel consequatur at
-                aspernatur!
-              </p>
+            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officia labore odio repudiandae unde quisquam sapiente, ut, reprehenderit soluta rerum, rem deleniti. Ab natus consectetur impedit eligendi, accusantium cumque quod voluptate.</p>
             </ProfileAbout>
 
             <ProfileLinks>
@@ -87,7 +82,7 @@ export function Home() {
         <SearchArea>
           <SearchAreaTitles>
             <p>Publicações</p>
-            <span>7 Publicações</span>
+            <span>{repositoryIssues?.length === 1 ? '1 Publicação' : `${repositoryIssues?.length} Publicações`} </span>
           </SearchAreaTitles>
           <SearchAreaInput>
             <input type="text" placeholder="Buscar conteúdo"></input>

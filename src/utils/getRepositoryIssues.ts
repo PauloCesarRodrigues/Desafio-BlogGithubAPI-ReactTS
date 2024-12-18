@@ -16,7 +16,6 @@ export async function getRepositoryIssues() {
     )
       .then((response) => response.json())
       .then((data) => (repositoryIssues = data));
-      console.log(repositoryIssues)
     return repositoryIssues;
   }
 

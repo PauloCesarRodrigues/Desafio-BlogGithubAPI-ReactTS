@@ -57,7 +57,7 @@ export const ProfileTitles = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: flex-start;
-  
+
 
   p,h1{
     color: ${props => props.theme["blue-500"]};
@@ -96,6 +96,7 @@ export const ProfileAbout = styled.div`
   text-align: left;
   flex-wrap: wrap;
 
+  width: 50rem;
   max-width: 50rem;
   word-wrap: break-word; 
   white-space: normal;
@@ -113,6 +114,7 @@ export const ProfileLinks = styled.div`
 
   gap: 1.5rem;
   margin-left: -1rem;
+  
 
 
   p{

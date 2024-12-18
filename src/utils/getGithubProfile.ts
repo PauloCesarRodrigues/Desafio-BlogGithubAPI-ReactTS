@@ -12,7 +12,7 @@ export async function getGithubProfile() {
     })
       .then((response) => response.json())
       .then((data) => (githubProfile = data));
-
+      console.log(githubProfile)
     return githubProfile;
   }
 
