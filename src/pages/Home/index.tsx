@@ -1,4 +1,6 @@
+ 
 /* eslint-disable react-refresh/only-export-components */
+
 import {
   HomeContainer,
   HomeContent,
@@ -17,9 +19,15 @@ import linkIcon from "../../images/home/profileIcons/linkIcon.svg";
 import githubIcon from "../../images/home/profileIcons/githubIcon.svg";
 import companyIcon from "../../images/home/profileIcons/companyIcon.svg";
 import followersIcon from "../../images/home/profileIcons/followersIcon.svg";
+
 import { Repository } from "./components/Repository";
-import { getGithubProfile } from "../../utils/getGithubProfile";
-import { getRepositoryIssues } from "../../utils/getRepositoryIssues"
+
+import { fetchGithubProfile } from "../../services/getGithubProfile";
+import { fetchRepositoryIssues } from "../../services/getRepositoryIssue"
+import { useState } from "react";
+
+
+
 
 interface GithubProfile {
   avatar_url: string
@@ -40,12 +48,24 @@ export const myGithubUser = "paulocesarrodrigues";
 export const challengeRepository = "Desafio-BlogGithubAPI-ReactTS";
 export const secretKey = import.meta.env.VITE_SECRET_KEY;
 
+const githubProfile: GithubProfile  = await fetchGithubProfile(myGithubUser);
 
-const repositoryIssues: RepositoryIssue[] | undefined = await getRepositoryIssues();
-const githubProfile: GithubProfile | undefined = await getGithubProfile();
+const filteredRepositories: RepositoryIssue[] = await fetchRepositoryIssues({
+  query: '',
+  username: myGithubUser,
+  repo: challengeRepository
+})
+
+
 
 export function Home() {
-  //corpo do repositório
+
+  const [searchbarValue, setSearchbarValue] = useState('')
+
+  async function handleInputValueChange(value: string){
+    setSearchbarValue(value)
+    console.log('valor do searchbarValue:' + searchbarValue)
+  }
 
   return (
     <HomeContainer>
@@ -82,24 +102,26 @@ export function Home() {
         <SearchArea>
           <SearchAreaTitles>
             <p>Publicações</p>
-            <span>{repositoryIssues?.length === 1 ? '1 Publicação' : `${repositoryIssues?.length} Publicações`} </span>
+            <span>{filteredRepositories?.length === 1 ? '1 Publicação' : `${filteredRepositories?.length} Publicações`} </span>
           </SearchAreaTitles>
           <SearchAreaInput>
-            <input type="text" placeholder="Buscar conteúdo"></input>
+            <input type="text" placeholder="Buscar conteúdo" onChange={e => handleInputValueChange(e.target.value)}></input>
           </SearchAreaInput>
         </SearchArea>
 
-        <RepositoriesArea>
-          {repositoryIssues?.map((issue) =>(
-            <Repository
-            key={issue.number}
-            body={issue.body}  
-            title={issue.title}  
-            created_at={issue.created_at.toString()}  
-          />
-          ))}
 
+        <RepositoriesArea>
+          {filteredRepositories?.map((issue: RepositoryIssue) => (
+            <Repository
+              key={issue.number}
+              body={issue.body}
+              title={issue.title}
+              created_at={issue.created_at.toString()}
+            />
+          ))}
         </RepositoriesArea>
+
+
       </HomeContent>
     </HomeContainer>
   );
