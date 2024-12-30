@@ -1,6 +1,3 @@
- 
-/* eslint-disable react-refresh/only-export-components */
-
 import {
   HomeContainer,
   HomeContent,
@@ -24,10 +21,7 @@ import { Repository } from "./components/Repository";
 
 import { fetchGithubProfile } from "../../services/getGithubProfile";
 import { fetchRepositoryIssues } from "../../services/getRepositoryIssue"
-import { useState } from "react";
-
-
-
+import { useEffect, useState } from "react";
 
 interface GithubProfile {
   avatar_url: string
@@ -46,26 +40,43 @@ interface RepositoryIssue{
 
 export const myGithubUser = "paulocesarrodrigues";
 export const challengeRepository = "Desafio-BlogGithubAPI-ReactTS";
-export const secretKey = import.meta.env.VITE_SECRET_KEY;
-
-const githubProfile: GithubProfile  = await fetchGithubProfile(myGithubUser);
-
-const filteredRepositories: RepositoryIssue[] = await fetchRepositoryIssues({
-  query: '',
-  username: myGithubUser,
-  repo: challengeRepository
-})
-
-
+/*export const secretKey = import.meta.env.VITE_SECRET_KEY;*/
 
 export function Home() {
 
+  const [githubProfile, setGithubProfile] = useState<GithubProfile | null>(null);
   const [searchbarValue, setSearchbarValue] = useState('')
+  const [filteredRepositories, setFilteredRepositories] = useState<RepositoryIssue[]>()
 
   async function handleInputValueChange(value: string){
     setSearchbarValue(value)
     console.log('valor do searchbarValue:' + searchbarValue)
   }
+
+  useEffect(()=>{
+    async function loadGithubProfile(){
+      try{
+        const profile = await fetchGithubProfile(myGithubUser);
+        setGithubProfile(profile);
+      }catch(e){ console.error('error:' + e) }
+    }
+    loadGithubProfile()
+  },[])
+
+
+  useEffect(()=>{
+    async function loadRepositoryIssues(){
+      try{
+        const repositoryIssue: RepositoryIssue[] = await fetchRepositoryIssues({
+          query: searchbarValue,
+          username: myGithubUser,
+          repo: challengeRepository
+        })
+        setFilteredRepositories(repositoryIssue)
+     }catch(e){ console.error('error:' + e)}
+    }
+    loadRepositoryIssues()
+  },[searchbarValue])
 
   return (
     <HomeContainer>
@@ -114,13 +125,13 @@ export function Home() {
           {filteredRepositories?.map((issue: RepositoryIssue) => (
             <Repository
               key={issue.number}
+              id={issue.number}
               body={issue.body}
               title={issue.title}
               created_at={issue.created_at.toString()}
             />
           ))}
         </RepositoriesArea>
-
 
       </HomeContent>
     </HomeContainer>

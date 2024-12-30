@@ -1,6 +1,7 @@
 import styled from "styled-components"
+import { Link } from "react-router-dom"
 
-export const RepositoryContainer = styled.div`
+export const RepositoryContainer = styled(Link)`
   margin-left: -1rem;
   
   width: 33rem;
@@ -12,6 +13,9 @@ export const RepositoryContainer = styled.div`
   background-color: ${props => props.theme["darkblue-700"]};
 
   border-radius: 10px;
+
+  text-decoration: none;
+  
 `
 
 export const RepositoryHeader = styled.div`
