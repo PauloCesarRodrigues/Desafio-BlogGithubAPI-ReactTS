@@ -49,7 +49,7 @@ export const ProfileContent = styled.div`
 
   margin-left: 2rem;
 
-  gap: 4rem;
+  gap: 3.5rem;
 `
 
 export const ProfileTitles = styled.div`
@@ -59,13 +59,8 @@ export const ProfileTitles = styled.div`
   align-items: flex-start;
 
 
-  p,h1{
-    color: ${props => props.theme["blue-500"]};
-
-  }
-
   h1{
-    color: ${props => props.theme["blue-500"]};
+    color: ${props => props.theme["darkblue-100"]};
     font-size: 1.5rem;
     font-weight: bold;
   }
@@ -87,6 +82,7 @@ export const ProfileTitles = styled.div`
   p{
     font-size: 1rem;
     font-weight: 500;
+    color: ${props => props.theme["blue-500"]};
   }
 
 `
@@ -101,7 +97,7 @@ export const ProfileAbout = styled.div`
   word-wrap: break-word; 
   white-space: normal;
 
-  color: ${props => props.theme["blue-500"]};
+  color: ${props => props.theme["darkblue-300"]};
 
   margin-top: -2rem;
   
@@ -119,13 +115,13 @@ export const ProfileLinks = styled.div`
 
   p{
     margin-left: 0.5rem;
-    color: ${props => props.theme["blue-500"]};
+    color: ${props => props.theme["darkblue-200"]};
     font-weight: 400;
     }
 
   img{
-    height: 1rem;
-    width: 1rem;
+    height: 1.2rem;
+    width: 1.2rem;
     margin-left: 0.75rem;
   }
 

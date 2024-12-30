@@ -13,7 +13,7 @@ interface RepositoryProps {
 export const Repository: React.FC<RepositoryProps> = ({ id, body, title, created_at }) => {
 
   const tempoQuePassouDesDaPublicacao = formatDistanceToNowStrict(new Date(created_at), { locale: ptBR });
-
+  
   return(
 
     <RepositoryContainer to={`/issue/${id}`}>

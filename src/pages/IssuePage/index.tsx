@@ -1,10 +1,27 @@
 import { useParams } from "react-router-dom"
+import { IssuePageContent, IssuePageTitleSection, TitleSectionButtons, TitleSectionContent, TitleSectionLinks, TitleSectionText } from './styles'
 
 export function IssuePage(){
 
-  const {issueId} = useParams();
+  const { issueId } = useParams();
 
   return(
-    <h1>issue: {issueId}</h1>
+    <IssuePageContent>
+      <IssuePageTitleSection>
+        <TitleSectionButtons>
+
+        </TitleSectionButtons>
+
+        <TitleSectionContent>
+          <TitleSectionText>
+
+          </TitleSectionText>
+          <TitleSectionLinks>
+
+          </TitleSectionLinks>
+        </TitleSectionContent>
+      </IssuePageTitleSection>
+
+    </IssuePageContent>
   )
 }

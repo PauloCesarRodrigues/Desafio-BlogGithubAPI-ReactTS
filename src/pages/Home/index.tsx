@@ -12,10 +12,10 @@ import {
   SearchAreaTitles,
 } from "./styles";
 
-import linkIcon from "../../images/home/profileIcons/linkIcon.svg";
-import githubIcon from "../../images/home/profileIcons/githubIcon.svg";
-import companyIcon from "../../images/home/profileIcons/companyIcon.svg";
-import followersIcon from "../../images/home/profileIcons/followersIcon.svg";
+import linkIcon from "../../images/mainSectionIcons/linkIcon.svg";
+import githubIcon from "../../images/mainSectionIcons/githubIcon.svg";
+import companyIcon from "../../images/mainSectionIcons/companyIcon.svg";
+import followersIcon from "../../images/mainSectionIcons/followersIcon.svg";
 
 import { Repository } from "./components/Repository";
 
