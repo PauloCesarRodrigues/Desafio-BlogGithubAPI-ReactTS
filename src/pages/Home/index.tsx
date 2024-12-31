@@ -23,6 +23,8 @@ import { fetchGithubProfile } from "../../services/getGithubProfile";
 import { fetchRepositoryIssues } from "../../services/getRepositoryIssues"
 import { useEffect, useState } from "react";
 
+import { useForm, Controller, SubmitHandler } from 'react-hook-form';
+
 interface GithubProfile {
   avatar_url: string
   name: string
@@ -38,20 +40,24 @@ interface RepositoryIssue{
   number: number;
 }
 
+interface FormData {
+  searchbarValue: string;
+}
+
 export const myGithubUser = "paulocesarrodrigues";
 export const challengeRepository = "Desafio-BlogGithubAPI-ReactTS";
 /*export const secretKey = import.meta.env.VITE_SECRET_KEY;*/
 
 export function Home() {
+  const { control, handleSubmit } = useForm<FormData>();
 
   const [githubProfile, setGithubProfile] = useState<GithubProfile | null>(null);
   const [searchbarValue, setSearchbarValue] = useState('')
   const [filteredRepositories, setFilteredRepositories] = useState<RepositoryIssue[]>()
 
-  async function handleInputValueChange(value: string){
-    setSearchbarValue(value)
-    /*console.log('valor do searchbarValue:' + searchbarValue)*/
-  }
+  const onSubmit: SubmitHandler<FormData> = (data) => {
+    setSearchbarValue(data.searchbarValue); 
+  };
 
   useEffect(()=>{
     async function loadGithubProfile(){
@@ -116,7 +122,20 @@ export function Home() {
             <span>{filteredRepositories?.length === 1 ? '1 Publicação' : `${filteredRepositories?.length} Publicações`} </span>
           </SearchAreaTitles>
           <SearchAreaInput>
-            <input type="text" placeholder="Buscar conteúdo" onChange={e => handleInputValueChange(e.target.value)}></input>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <Controller
+                name="searchbarValue"
+                control={control}
+                defaultValue=""
+                render={({ field }) => (
+                  <input
+                    {...field} 
+                    type="text"
+                    placeholder="Buscar conteúdo"
+                  />
+                )}
+              />
+            </form>
           </SearchAreaInput>
         </SearchArea>
 
