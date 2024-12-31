@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate  } from "react-router-dom"
 import { 
   CommentContent,
   CommentContentContainer,
@@ -19,8 +19,10 @@ import  commentIcon  from '../../images/mainSectionIcons/commentIcon.svg'
 import  calendarIcon  from '../../images/mainSectionIcons/calendarIcon.svg'
 
 import { useEffect, useState } from "react";
+
 import {myGithubUser, challengeRepository} from '../Home/index'
 import { fetchIssueContent } from "../../services/getIssueContent";
+
 import { formatDistanceToNowStrict } from "date-fns";
 import { ptBR } from "date-fns/locale";
 
@@ -79,12 +81,17 @@ export function IssuePage(){
 
   const dateFormatted = formatDistanceToNowStrict(new Date(issueContentRes?.created_at), { locale: ptBR });
   
+  const navigate = useNavigate();
+
+  const handleBackClick = () => {
+    navigate(-1);  
+  };
 
   return(
     <IssuePageContent>
       <IssuePageTitleSection>
         <TitleSectionButtons>
-          <a href="http://localhost:5173/"> <img src={ backIcon }/> <p>VOLTAR</p></a>
+          <button onClick={handleBackClick}> <img src={ backIcon }/> <p>VOLTAR</p></button>
           <a href={`${reposityLink}/issues/${issueId}`}> <p> VER NO GITHUB </p> <img src={ linkIcon }/> </a>
         </TitleSectionButtons>
         <TitleSectionContent>

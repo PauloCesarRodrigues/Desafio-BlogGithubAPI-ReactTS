@@ -38,13 +38,18 @@ export const TitleSectionButtons = styled.div`
   justify-content: space-between;
   width: 68rem;
 
-  a{
+  a, button{
     margin: 2rem 2rem 0 2rem;
     text-decoration: none;
     display: flex;
     flex-direction: row;
     margin-left: 1rem;
     gap: 0.5rem;
+
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
 
     img{
       height: 1.2rem;
