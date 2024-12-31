@@ -36,16 +36,25 @@ export const TitleSectionButtons = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: flex-start;
+  width: 68rem;
 
+  a{
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    margin-left: 1rem;
 
-  p,h1{
-    color: ${props => props.theme["blue-500"]};
-  }
+    img{
+      height: 1.2rem;
+      width: 1.2rem;
+      margin: 0 0rem;
+    }
 
-  h1{
-    font-size: 1.5rem;
-    font-weight: bold;
+    p{
+      font-size: 1rem;
+      font-weight: 500;
+      color: ${props => props.theme["blue-500"]};
+    }
   }
 `
 
