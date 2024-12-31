@@ -20,7 +20,7 @@ import followersIcon from "../../images/mainSectionIcons/followersIcon.svg";
 import { Repository } from "./components/Repository";
 
 import { fetchGithubProfile } from "../../services/getGithubProfile";
-import { fetchRepositoryIssues } from "../../services/getRepositoryIssue"
+import { fetchRepositoryIssues } from "../../services/getRepositoryIssues"
 import { useEffect, useState } from "react";
 
 interface GithubProfile {
@@ -50,7 +50,7 @@ export function Home() {
 
   async function handleInputValueChange(value: string){
     setSearchbarValue(value)
-    console.log('valor do searchbarValue:' + searchbarValue)
+    /*console.log('valor do searchbarValue:' + searchbarValue)*/
   }
 
   useEffect(()=>{
