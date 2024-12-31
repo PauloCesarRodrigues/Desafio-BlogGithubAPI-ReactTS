@@ -76,7 +76,7 @@ export function Home() {
      }catch(e){ console.error('error:' + e)}
     }
     loadRepositoryIssues()
-  },[searchbarValue])
+  },[searchbarValue]) //<-- requisição a cada tecla digitada, não é o recomendado mas serviu para o projeto.
 
   return (
     <HomeContainer>
