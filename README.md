@@ -12,7 +12,7 @@ Este projeto é uma aplicação desenvolvida com React e TypeScript que utiliza 
 - **Styled-Components**: Utilizado para estilização.
 
 ## 🚀 Link para visualizar o projeto
-[Confira a versão online do projeto aqui](https://vercel)
+[Confira a versão online do projeto aqui](https://desafio-blog-githubapi-react-ts.vercel.app/)
 
 ## 📖 Funcionalidades
 
